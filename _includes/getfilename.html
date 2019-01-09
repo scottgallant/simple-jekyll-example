@@ -1,0 +1,21 @@
+{% for related in page.related %}
+	{% assign related2 = related | split: "." %}
+	{% assign related3 = related2[0] | split: "/" %}
+	{% if related3.size > 1 %}
+		{% assign related4 = related3.last | split: "-" %}
+		{% assign related5 = "" | split: "" %}
+		{% for item in related4 %}
+			{% if forloop.index <= 3 %}
+				{% comment %}
+					skip through the date
+				{% endcomment %}
+			{% else %}
+				 {% assign related5 = related5 | push: item %}
+			{% endif %}
+		{% endfor %}
+		{% assign filename = related5 | join: "-" %}
+	{% else %}
+		{% assign filename = related %}
+	{% endif %}
+	{{ filename }}<br>
+{% endfor %}
